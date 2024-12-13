@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Журнал оценок</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Журнал оценок</h1>
+        <nav>
+            <button data-tab="upload">Загрузка оценок</button>
+            <button data-tab="edit">Создание/Редактирование</button>
+            <button data-tab="table-stats">Статистика (таблица)</button>
+            <button data-tab="graph-stats">Статистика (графики)</button>
+            <button data-tab="help">Помощь</button>
+            <button data-tab="about">О программе</button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Вкладка загрузки оценок -->
+        <section id="upload" class="tab active">
+            <h2>Загрузка оценок</h2>
+            <label for="file-input">Выберите файл (CSV):</label>
+            <input type="file" id="file-input" accept=".csv">
+            <button id="load-file">Загрузить файл</button>
+            <h3>Предварительный просмотр:</h3>
+            <table id="file-preview">
+                <thead>
+                    <tr>
+                        <th>Имя</th>
+                        <th>Класс</th>
+                        <th>Информатика</th>
+                        <th>Физика</th>
+                        <th>Математика</th>
+                        <th>Литература</th>
+                        <th>Музыка</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </section>
+
+        <!-- Вкладка создание/редактирование -->
+        <section id="edit" class="tab">
+            <h2>Создание/Редактирование</h2>
+            <h3>Таблица учеников:</h3>
+            <table id="edit-table">
+                <thead>
+                    <tr>
+                        <th>Имя</th>
+                        <th>Класс</th>
+                        <th>Информатика</th>
+                        <th>Физика</th>
+                        <th>Математика</th>
+                        <th>Литература</th>
+                        <th>Музыка</th>
+                        <th>Редактировать</th>
+                        <th>Удалить</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+
+            <h3>Добавить нового ученика:</h3>
+            <form id="add-student-form">
+                <input type="text" id="student-name" placeholder="ФИО ученика" required>
+                <input type="text" id="student-class" placeholder="Класс" required>
+                <input type="number" id="informatics" placeholder="Информатика" min="1" max="5" required>
+                <input type="number" id="physics" placeholder="Физика" min="1" max="5" required>
+                <input type="number" id="mathematics" placeholder="Математика" min="1" max="5" required>
+                <input type="number" id="literature" placeholder="Литература" min="1" max="5" required>
+                <input type="number" id="music" placeholder="Музыка" min="1" max="5" required>
+                <button type="submit">Добавить ученика</button>
+            </form>
+
+            <h3>Сохранение изменений ученика:</h3>
+            <form id="edit-student-form">
+                <input type="text" id="edit-student-name" placeholder="ФИО ученика" required>
+                <input type="text" id="edit-student-class" placeholder="Класс" required>
+                <input type="number" id="edit-informatics" placeholder="Информатика" min="1" max="5" required>
+                <input type="number" id="edit-physics" placeholder="Физика" min="1" max="5" required>
+                <input type="number" id="edit-mathematics" placeholder="Математика" min="1" max="5" required>
+                <input type="number" id="edit-literature" placeholder="Литература" min="1" max="5" required>
+                <input type="number" id="edit-music" placeholder="Музыка" min="1" max="5" required>
+                <button type="submit">Сохранить изменения</button>
+            </form>
+
+            <button id="download-file">Скачать измененный файл</button>
+        </section>
+
+        <!-- Другие вкладки (заготовки) -->
+        <section id="table-stats" class="tab">
+            <h2>Статистика по классам (таблицы)</h2>
+            <div id="class-stats"></div>
+            <h3>Общая статистика по всем ученикам</h3>
+            <div id="all-students-stats"></div>
+        </section>
+
+        <section id="graph-stats" class="tab">
+            <h2>Статистика по классам (графики)</h2>
+            <div id="class-graph-stats"></div>
+            <h3>Общая статистика по всем ученикам (графики)</h3>
+            <div id="all-students-graph-stats"></div>
+        </section>
+
+        <section id="help" class="tab">
+            <h2>Помощь</h2>
+            <p>
+                Изначально вы находитесь на вкладке <strong>Загрузка оценок</strong> при открытии сайта. Для работы всех возможностей сайта, вам нужно нажать на кнопку <strong>Выберите файл</strong>, после выбора файла с вашего устройства, нажмите на кнопку <strong>Загрузить файл</strong>. (Данные из вашего файла отобразятся на этой же вкладке в секции предварительный просмотр).
+            </p>
+            <p>
+                После чего вы можете перейти на вкладку <strong>Создание/Редактирование</strong>. На этой вкладке появляется та же таблица, что вы загрузили, но теперь с возможностью ее редактирования. Справа от всех учеников есть кнопки <strong>Редактировать</strong> - чтобы изменить данные об ученике, после ее нажатия вам нужно будет спуститься вниз сайта, где в поле <strong>Сохранение изменений ученика</strong> будут данные ученика, которого вы хотите поменять, далее просто наводитесь курсором на ячейку, данные в которой вы хотите поменять. Чтобы применить изменения к ученику, нажмите на кнопку <strong>Сохранить изменения</strong>. После этого данные обновятся в таблице. Также справа от всех учеников присутствует кнопка <strong>Удалить</strong>, которая удаляет ученика, при ее нажатии ученик сразу удаляется. Под таблицей также есть поле <strong>Добавить нового ученика:</strong> оно создано для добавления ученика, которого нет в таблице. В нем вы должны ввести все данные об учащемся и нажать на кнопку <strong>Добавить ученика</strong>, после этого новый ученик добавится в конец таблицы. В самом низу страницы есть кнопка <strong>Скачать измененный файл</strong>, которая сохранит отредактированный документ на ваш компьютер.
+            </p>
+            <p>
+                После того как вы отредактировали таблицу, вам обязательно нужно перейти во вкладку <strong>Статистика (таблица)</strong>. На ней отображаются таблицы со статистикой. Изначально идут таблицы со статистикой по отдельным классам и предметам, а после подзаголовка <strong>Общая статистика по всем ученикам</strong> идут таблицы со статистикой среди всех учеников соответственно (нет деления на классы).
+            </p>
+            <p>
+                Чтобы посмотреть графическое представление статистики, вам нужно после вкладки <strong>Статистика (таблица)</strong> перейти на вкладку <strong>Статистика (графики)</strong>, где теперь отображена та же информация о статистике, но уже в виде графиков.
+            </p>
+            <p>
+                Вкладка <strong>Помощь</strong> - на ней вы находитесь сейчас. Здесь описано руководство пользования сайтом.
+            </p>
+            <p>
+                Вкладка <strong>О программе</strong> - на ней вы сможете найти данные о разработчике.
+            </p>
+        </section>
+
+        <section id="about" class="tab" >
+            <h2>О программе</h2>
+            <p> ФИО разработчика: Хохлов Андрей Дмитриевич </p>
+            <p> Почта: aimlordxddd@gmail.com </p>
+            <img src="avatar.jpg" alt="Фото разработчика" style="max-width: 250px; margin: 10px 0; display: inline-block;">
+        </section>
+
+    </main>
+    <script src="app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+</html>
